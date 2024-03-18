@@ -89,7 +89,7 @@ class Sand(Particle):
 
 class Water(Particle):
 	def __init__(self, y, x):
-		super().__init__(y, x, (255, 155, 155))#(0, 100, 255))
+		super().__init__(y, x, (0, 100, 255))
 	
 	def update(self, grid):
 		self.moveMaterial(self.y+1, self.x, self, grid)
