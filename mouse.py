@@ -1,7 +1,7 @@
 import pygame
 from pygame import Vector2
 from grid import Grid
-from grid import Particle, Sand, Air
+from materials import Sand
 import math
 from globals import SCREEN_X, SCREEN_Y, SQUARE_SIZE
 

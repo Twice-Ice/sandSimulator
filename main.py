@@ -1,6 +1,7 @@
 import pygame
 from pygame import Vector2
-from grid import Grid, Particle, Air, Sand, Water
+from grid import Grid
+from materials import Air, Sand, Water
 from mouse import Mouse
 from globals import SCREEN_X, SCREEN_Y, BG_COLOR, SQUARE_SIZE
 pygame.init
@@ -17,6 +18,8 @@ possibleMaterials = [
 	Sand,
 	Water,
 ]
+
+print(SCREEN_X/ SQUARE_SIZE)
 
 cooldown = 0
 
@@ -38,6 +41,11 @@ while not doExit:
 					print(" ", end="")
 			print()
 		print("----------------------------------")
+	if keys[pygame.K_o]:
+		for y in range(len(world.tree)):
+			for x in range(len(world.tree[y])):
+				print(str(world.tree[y][x])[0], end="")
+			print()
 	if keys[pygame.K_UP] and cooldown == 0:
 		player.material = possibleMaterials[possibleMaterials.index(player.material) + 1] if possibleMaterials.index(player.material) + 1 < len(possibleMaterials) else possibleMaterials[0]
 		cooldown = 25
