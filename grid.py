@@ -1,4 +1,5 @@
 import pygame
+import random
 from pygame import Vector2
 from materials import Air, Particle
 from globals import SCREEN_X, SCREEN_Y, SQUARE_SIZE
@@ -16,10 +17,11 @@ class Grid:
 
 	def update(self, screen):
 		for y in range(len(self.grid)-1, 0, -1):
+			rng = random.randint(0, 255)
 			for x in range(len(self.grid[y])):
 				if type(self.grid[y][x]) != Air:
 					self.grid[y][x].draw((x*self.xScale, y*self.yScale), screen)
-					self.grid[y][x].update(self.grid)
+					self.grid[y][x].update(self.grid, rng)
 					# self.tree[y//10][x//10] = True
 
 		# for yTree in range(len(self.tree)-1, 0, -1):

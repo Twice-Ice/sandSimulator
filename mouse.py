@@ -1,7 +1,7 @@
 import pygame
 from pygame import Vector2
 from grid import Grid
-from materials import Sand
+from materials import Sand, Air
 import math
 from globals import SCREEN_X, SCREEN_Y, SQUARE_SIZE
 
@@ -36,5 +36,5 @@ class Mouse:
 					if spawnedParticles <= 10:
 						xPos = x * self.xScale + self.xScale//2
 						yPos = y * self.yScale + self.yScale//2
-						if math.sqrt((xPos - self.pos.x)**2 + (yPos - self.pos.y)**2) <= self.brushSize//2:
+						if math.sqrt((xPos - self.pos.x)**2 + (yPos - self.pos.y)**2) <= self.brushSize//2 and (x >= 0 and x < len(world.grid[y]) and y >= 0 and y < len(world.grid) and type(world.grid[y][x]) == Air):
 							world.setMaterial(y, x, self.material)
