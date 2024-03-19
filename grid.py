@@ -22,6 +22,12 @@ class Grid:
 				if type(self.grid[y][x]) != Air:
 					self.grid[y][x].draw((x*self.xScale, y*self.yScale), screen)
 					self.grid[y][x].update(self.grid, rng)
+
+		for y in range(len(self.grid)-1, 0, -1):
+			for x in range(len(self.grid[y])):
+				if type(self.grid[y][x]) != Air:
+					self.grid[y][x].moved = False
+			# self.grid[y][len(self.grid[y])-1].movedRight = False
 					# self.tree[y//10][x//10] = True
 
 		# for yTree in range(len(self.tree)-1, 0, -1):

@@ -3,7 +3,7 @@ from pygame import Vector2
 from grid import Grid
 from materials import Air, Sand, Water
 from mouse import Mouse
-from globals import SCREEN_X, SCREEN_Y, BG_COLOR, SQUARE_SIZE
+from globals import SCREEN_X, SCREEN_Y, BG_COLOR, SQUARE_SIZE, FPS
 pygame.init
 
 screen = pygame.display.set_mode((SCREEN_X, SCREEN_Y))
@@ -24,7 +24,7 @@ print(SCREEN_X/ SQUARE_SIZE)
 cooldown = 0
 
 while not doExit:
-	delta = clock.tick(60) / 1000
+	delta = clock.tick(FPS) / 1000
 	screen.fill(BG_COLOR)
 
 	for event in pygame.event.get():

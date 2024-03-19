@@ -10,6 +10,7 @@ class Particle:
 		self.color = color
 		self.rng = 0
 		self.grid = grid
+		self.moved = False
 		self.xScale = SQUARE_SIZE if type(SQUARE_SIZE) != Vector2 else SQUARE_SIZE.x
 		self.yScale = SQUARE_SIZE if type(SQUARE_SIZE) != Vector2 else SQUARE_SIZE.y
 	
@@ -72,6 +73,7 @@ class Water(Particle):
 		if self.onGrid(y, x):
 			if type(self.grid[y][x]) == Air:
 				self.swap(y, x)
+				self.moved = True
 				return True
 			else:
 				return False
@@ -84,34 +86,48 @@ class Water(Particle):
 
 	def draw(self, pos, screen):
 		pygame.draw.circle(screen, self.color, pos, self.xScale//2)
-		
 
 	def update(self, grid, rng):
-		super().update(grid, rng)
-		# if self.onGrid(self.y+1, self.x) and type(grid[self.y+1][self.x]) == Air:
-		# 	self.swap(self.y+1, self.x, grid)
-		# else:
-		# 	if self.onGrid(self.y+1, self.x+1) and type(grid[self.y+1][self.x+1]) == Air:
-		# 		self.swap(self.y+1, self.x+1, grid)
-		# 	elif self.onGrid(self.y+1, self.x-1) and type(grid[self.y+1][self.x-1]) == Air:
-		# 		self.swap(self.y+1, self.x-1, grid)
-		# 	if self.onGrid(self.y, self.x+1) and type(grid[self.y][self.x+1]) == Air:
-		# 		self.swap(self.y, self.x+1, grid)
-		# 	elif self.onGrid(self.y, self.x-1) and type(grid[self.y][self.x-1]) == Air:
-		# 		self.swap(self.y, self.x-1, grid)
-		# 	if self.onGrid(self.y, self.x+2) and type(grid[self.y][self.x+2]) == Air:
-		# 		self.swap(self.y, self.x+2, grid)
-		# 	elif self.onGrid(self.y, self.x-2) and type(grid[self.y][self.x-2]) == Air:
-		# 		self.swap(self.y, self.x-2, grid)
-		# tempMove(self.y, self.x+2)
-		# tempMove(self.y, self.x-2)
+		if self.moved == False:
+			super().update(grid, rng)
 
-		movedDown = self.move(self.y+1, self.x)
-		if movedDown:
-			self.move(self.y, self.x-1)
-			self.move(self.y, self.x+1)
-		else:
-			if self.rng % 2 == 0:
+			# for i in range(len(self.grid)):
+			# 	FDFSA = type(self.grid[len(self.grid)-1][i])
+			# 	if FDFSA == Water:
+			# 		print("W", end = " ")
+			# 	elif FDFSA == Air:
+			# 		print("_", end = " ")
+			# 	elif FDFSA == Sand:
+			# 		print("S", end = " ")
+			# print()
+
+			# self.move(self.y+1, self.x)
+			# if (self.rng + self.y) % 2 == 0:
+			# 	self.move(self.y, self.x-1)
+			# else:
+			# 	self.move(self.y, self.x+1)
+
+			# if (self.checkSpot(self.y, self.x-1) or self.checkSpot(self.y, self.x+1)) and not (self.checkSpot(self.y, self.x-1) and self.checkSpot(self.y, self.x+1)):
+			# 	if self.checkSpot(self.y, self.x+1):
+			# 		self.move(self.y, self.x+1)
+			# 	elif self.checkSpot(self.y, self.x-1):
+			# 		self.move(self.y, self.x-1)
+			# 	self.move(self.y+1, self.x)
+			# elif (self.checkSpot(self.y, self.x-1) and self.checkSpot(self.y, self.x+1)):
+			# 	if (self.rng + self.y) % 2 == 0:
+			# 		self.move(self.y, self.x-1)
+			# 	else:
+			# 		self.move(self.y, self.x+1)
+			# 	self.move(self.y+1, self.x)
+			# else:
+			# 	self.move(self.y+1, self.x)
+
+			self.move(self.y+1, self.x-1)
+			self.move(self.y+1, self.x+1)
+
+			if (self.rng + self.x) % 2 == 0:
 				self.move(self.y, self.x-1)
 			else:
 				self.move(self.y, self.x+1)
+
+			self.move(self.y+1, self.x)

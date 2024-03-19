@@ -3,3 +3,5 @@ SCREEN_Y = 720
 BG_COLOR = (0, 0, 0)
 
 SQUARE_SIZE = 2
+
+FPS = 60
